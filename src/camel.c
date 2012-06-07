@@ -1,5 +1,7 @@
+#include "dbg.h"
 #include <stdio.h>
 int main(){
-  printf("hello");
+  debug("hello");
+  //
   return 0;
 }
