@@ -1,21 +1,59 @@
-CFLAGS=-g -O2 -Wall -Wextra -Isrc   $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
-CC="clang" 
+CC="gcc" 
+CFLAGS=-g -O2 -Wall -Wextra -Isrc -rdynamic  $(OPTFLAGS)
+LIBS=-ldl $(OPTLIBS)
 PREFIX?=/usr/local
-get_objs = $(addsuffix .o,$(basename $(wildcard $(1))))
 
-ASM=$(wildcard src/**/*.S src/*.S)
-SOURCES=$(wildcard src/**/*.c src/*.c) 
-OBJECTS=$(patsubst %.c,%.o,${SOURCES}) $(patsubst %.S,%.o,${ASM})
+SOURCES=$(wildcard src/**/*.c src/*.c)
+OBJECTS=$(patsubst %.c,%.o,$(SOURCES))
+
 TEST_SRC=$(wildcard tests/*_tests.c)
-TESTS=$(patsubst %.c,%,${TEST_SRC})
-MAKEOPTS=OPTFLAGS="${NOEXTCFLAGS} ${OPTFLAGS}" OPTLIBS="${OPTLIBS}" LIBS="${LIBS}" DESTDIR="${DESTDIR}" PREFIX="${PREFIX}"
+TESTS=$(patsubst %.c,%,$(TEST_SRC))
 
-all: bin/camel 
-bin/camel: $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o bin/camel  
-tests: 
-	echo not-implemented
-clean: 
-	rm -f camel
-test: 
-	@echo $(OBJECTS)
+TARGET=build/libcamel.a
+SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
+
+# The Target Build
+all: $(TARGET) $(SO_TARGET) tests
+
+dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS)
+dev: all
+
+$(TARGET): CFLAGS += -fPIC
+$(TARGET): build $(OBJECTS)
+	ar rcs $@ $(OBJECTS)
+	ranlib $@
+
+$(SO_TARGET): $(TARGET) $(OBJECTS)
+	$(CC) -shared -o $@ $(OBJECTS)
+
+build:
+	@mkdir -p build
+	@mkdir -p bin
+
+# The Unit Tests
+.PHONY: tests
+tests: CFLAGS += $(TARGET)
+tests: $(TESTS)
+	sh ./tests/runtests.sh
+
+valgrind:
+	VALGRIND="valgrind --log-file=/tmp/valgrind-%p.log" $(MAKE)
+
+# The Cleaner
+clean:
+	rm -rf build $(OBJECTS) $(TESTS)
+	rm -f tests/tests.log 
+	find . -name "*.gc*" -exec rm {} \;
+	rm -rf `find . -name "*.dSYM" -print`
+
+# The Install
+install: all
+	install -d $(DESTDIR)/$(PREFIX)/lib/
+	install $(TARGET) $(DESTDIR)/$(PREFIX)/lib/
+
+# The Checker
+BADFUNCS='[^_.>a-zA-Z0-9](str(n?cpy|n?cat|xfrm|n?dup|str|pbrk|tok|_)|stpn?cpy|a?sn?printf|byte_)' 
+check:
+	@echo Files with potentially dangerous functions.
+	@egrep $(BADFUNCS) $(SOURCES) || true
+
