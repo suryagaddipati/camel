@@ -1,9 +1,8 @@
 #include "minunit.h"
 #include <camel.h>
 char *test_scalars(){
-  debug("here");
-  printf("here");
-  return hello();
+  debug("here *****");
+  return NULL;
 }
 
 char *all_tests() {
@@ -12,7 +11,8 @@ char *all_tests() {
   return NULL;
 }
 int main(){
-  debug("hello");
+  mu_suite_start();
+  mu_run_test(test_scalars); 
   return 0;
 }
 RUN_TESTS(all_tests);
