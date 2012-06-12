@@ -1,3 +1,8 @@
-#include <stdio.h>
+typedef struct YamlNode{
+  char *value;
+  struct YamlNode *next;
+}YamlNode;
 
-int *hello();
+YamlNode *parse(char *file_name);
+
+void assign_value(YamlNode *yamlNode, char *line);
