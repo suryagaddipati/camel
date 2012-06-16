@@ -6,9 +6,9 @@ char *test_scalars()
 {
   char cwd[1024];
   getcwd(cwd, sizeof(cwd));
-  ScalarYamlNode *yml = parse(strcat (cwd, "/tests/fixtures/scalar.yml"));
+  ScalarNode *yml = parse(strcat (cwd, "/tests/fixtures/scalar.yml"));
   mu_assert(strcmp(yml->value ,"one") , "no dough");
-  mu_assert((((ScalarYamlNode*)yml->next)->value ,"two") , "no dough");
+  mu_assert((((ScalarNode*)yml->next)->value ,"two") , "no dough");
   return NULL;
 }
 
@@ -16,7 +16,7 @@ char *test_scalar_to_scalar_mapping()
 {
   char cwd[1024];
   getcwd(cwd, sizeof(cwd));
-  ScalarYamlNode *yml = parse(strcat (cwd, "/tests/fixtures/scalar_map.yml"));
+  KeyValueNode *yml = parse(strcat (cwd, "/tests/fixtures/scalar_map.yml"));
   return NULL;
 }
 
