@@ -1,8 +1,15 @@
-typedef struct YamlNode{
+typedef struct ScalarYamlNode{
   char *value;
-  struct YamlNode *next;
-}YamlNode;
+  void *next;
+}ScalarYamlNode;
 
-YamlNode *parse(char *file_name);
+typedef struct KeyValueYamlNode{
+  char *key;
+  void *value;
+  void *next;
+}KeyValueYamlNode;
 
-void assign_value(YamlNode *yamlNode, char *line);
+
+void *parse(char *file_name);
+
+void assign_value(ScalarYamlNode *yamlNode, char *line);

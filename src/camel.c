@@ -2,20 +2,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "camel.h"
-YamlNode *parse(char *file_name){
+void *parse(char *file_name){
   FILE *input = NULL; 
-  YamlNode *yamlNode , *currentNode;
   debug("Parsing file %s", file_name);
   char line[80];
   input = fopen(file_name,"r"); 
   check(input, "Failed to open %s.", "input.yml");
-  yamlNode = malloc(sizeof(YamlNode)); 
+
+ ScalarYamlNode *yamlNode , *currentNode;
+  yamlNode = malloc(sizeof(ScalarYamlNode)); 
   currentNode = yamlNode;
   while(fgets(line, 80, input) != NULL)
   {
-   if(line[0] == '-'){
+   if(line[0] == '-' && line[1] == ' '){
      assign_value(currentNode, line);
-     currentNode->next = malloc(sizeof(YamlNode)); 
+     currentNode->next = malloc(sizeof(ScalarYamlNode)); 
      currentNode = currentNode->next;
    }
   }
@@ -25,7 +26,7 @@ error:
   return  NULL;
 }
 
-void assign_value(YamlNode *yamlNode, char *line){
+void assign_value(ScalarYamlNode *yamlNode, char *line){
   yamlNode->value = malloc(80 * sizeof(char));
   int i;
   for( i=2; line[i] != '\0' ; i ++){
