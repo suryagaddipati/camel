@@ -9,9 +9,9 @@ void *parse(char *file_name){
   input = fopen(file_name,"r"); 
   check(input, "Failed to open %s.", "input.yml");
 
- ScalarNode *yamlNode , *currentNode;
-  yamlNode = malloc(sizeof(ScalarNode)); 
-  currentNode = yamlNode;
+ ScalarNode *rootNode =NULL , *currentNode = NULL;
+  rootNode = malloc(sizeof(ScalarNode)); 
+  currentNode = rootNode;
   while(fgets(line, 80, input) != NULL)
   {
    if(line[0] == '-' && line[1] == ' '){
@@ -20,17 +20,17 @@ void *parse(char *file_name){
      currentNode = currentNode->next;
    }
   }
-  return yamlNode;
+  return rootNode;
 error:
   if(input) fclose(input);
   return  NULL;
 }
 
-void assign_value(ScalarNode *yamlNode, char *line){
-  yamlNode->value = malloc(80 * sizeof(char));
+void assign_value(ScalarNode *rootNode, char *line){
+  rootNode->value = malloc(80 * sizeof(char));
   int i;
   for( i=2; line[i] != '\0' ; i ++){
-    yamlNode->value[i-2] = line[i];
+    rootNode->value[i-2] = line[i];
   }
-    yamlNode->value[i-2] = '\0';
+    rootNode->value[i-2] = '\0';
 }
