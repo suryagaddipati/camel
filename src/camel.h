@@ -1,3 +1,7 @@
+typedef struct Node{
+  void *next;
+}Node;
+
 typedef struct ScalarNode{
   char *value;
   void *next;

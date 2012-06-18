@@ -9,12 +9,14 @@ void *parse(char *file_name){
   input = fopen(file_name,"r"); 
   check(input, "Failed to open %s.", "input.yml");
 
- ScalarNode *rootNode =NULL , *currentNode = NULL;
-  rootNode = malloc(sizeof(ScalarNode)); 
-  currentNode = rootNode;
+ Node *rootNode =NULL , *currentNode = NULL;
   while(fgets(line, 80, input) != NULL)
   {
    if(line[0] == '-' && line[1] == ' '){
+     if( rootNode == NULL){
+       rootNode = malloc(sizeof(ScalarNode)); 
+       currentNode = rootNode;
+     }
      assign_value(currentNode, line);
      currentNode->next = malloc(sizeof(ScalarNode)); 
      currentNode = currentNode->next;
