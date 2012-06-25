@@ -39,27 +39,25 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     NUMBER = 258,
-     NAME = 259
+     COLON = 258,
+     LBRACE = 259,
+     RBRACE = 260,
+     QUOTE = 261,
+     TXT = 262
    };
 #endif
 /* Tokens.  */
-#define NUMBER 258
-#define NAME 259
+#define COLON 258
+#define LBRACE 259
+#define RBRACE 260
+#define QUOTE 261
+#define TXT 262
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-#line 20 "yaml.y"
-{
-	double dvalue;
-	int varindex;
-}
-/* Line 1529 of yacc.c.  */
-#line 62 "yaml.tab.h"
-	YYSTYPE;
+typedef int YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
