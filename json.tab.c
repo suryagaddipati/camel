@@ -415,7 +415,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    21,    21
+       0,    22,    22
 };
 #endif
 
@@ -1312,7 +1312,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 21 "json.y"
+#line 22 "json.y"
     { printf("ANS: %s\n", (yyvsp[(1) - (1)]));  ;}
     break;
 
@@ -1532,7 +1532,7 @@ yyreturn:
 }
 
 
-#line 24 "json.y"
+#line 25 "json.y"
 
 
 main()

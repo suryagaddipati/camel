@@ -18,7 +18,8 @@ void yyerror(const char *msg)
 
 %token  COLON LBRACE RBRACE QUOTE  TXT
 %%
-object :TXT              { printf("ANS: %s\n", $1);  }
+object : /*empty*/
+       TXT              { printf("ANS: %s\n", $1);  }
           ;
 
 %%

@@ -7,6 +7,6 @@
 %%
 \{  {return LBRACE;}
 \}  {return RBRACE;}
-[a-z]+ {return TXT;} 
+(.)+ {printf("matched"); return TXT;} 
 %%
 
