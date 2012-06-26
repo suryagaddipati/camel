@@ -84,10 +84,11 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "json.y"
+#line 1 "src/json.y"
  
 #include <stdio.h>
 #include <stdlib.h>
+
 
 extern int yylex();
 
@@ -121,7 +122,15 @@ void yyerror(const char *msg)
 #endif
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 18 "src/json.y"
+{
+     char *str;
+     char chr;
+      }
+/* Line 193 of yacc.c.  */
+#line 133 "src/json.tab.c"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -133,7 +142,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 137 "json.tab.c"
+#line 146 "src/json.tab.c"
 
 #ifdef short
 # undef short
@@ -415,7 +424,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22
+       0,    27,    27
 };
 #endif
 
@@ -1312,13 +1321,13 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 22 "json.y"
-    { printf("ANS: %s\n", (yyvsp[(1) - (1)]));  ;}
+#line 27 "src/json.y"
+    { printf("ANS: %s\n", (yyvsp[(1) - (1)].str));  ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1322 "json.tab.c"
+#line 1331 "src/json.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1532,7 +1541,7 @@ yyreturn:
 }
 
 
-#line 25 "json.y"
+#line 30 "src/json.y"
 
 
 main()

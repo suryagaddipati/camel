@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 extern int yylex();
 
 // better error reporting
@@ -14,12 +15,16 @@ void yyerror(const char *msg)
 }
 
 %}
+%union {
+     char *str;
+     char chr;
+      }
 
-
-%token  COLON LBRACE RBRACE QUOTE  TXT
+%token<chr>  COLON LBRACE RBRACE QUOTE 
+%token<str>   TXT
 %%
 object : /*empty*/
-       TXT              { printf("ANS: %s\n", $1);  }
+       TXT             { printf("ANS: %s\n", $1);  }
           ;
 
 %%

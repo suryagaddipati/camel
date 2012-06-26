@@ -1,5 +1,6 @@
+#line 2 "src/lexx.yy.c"
 
-#line 3 "lex.yy.c"
+#line 4 "src/lexx.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -368,9 +369,8 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[20] =
+static yyconst flex_int16_t yy_accept[10] =
     {   0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    5,    3,    4,    1,    2,    3,    0
     } ;
 
@@ -411,30 +411,26 @@ static yyconst flex_int32_t yy_meta[5] =
         1,    2,    1,    1
     } ;
 
-static yyconst flex_int16_t yy_base[22] =
+static yyconst flex_int16_t yy_base[11] =
     {   0,
-        0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-        0,    0,    8,    0,    9,    0,    0,    0,    9,    4,
-        6
+        0,    0,    6,    0,    7,    0,    0,    0,    7,    4
     } ;
 
-static yyconst flex_int16_t yy_def[22] =
+static yyconst flex_int16_t yy_def[11] =
     {   0,
-       19,    1,   20,   20,   20,   20,   20,   20,   20,   20,
-       20,   20,   19,   21,   19,   21,   21,   21,    0,   19,
-       19
+        9,    1,    9,   10,    9,   10,   10,   10,    0,    9
     } ;
 
-static yyconst flex_int16_t yy_nxt[14] =
+static yyconst flex_int16_t yy_nxt[12] =
     {   0,
-       14,   15,   16,   17,   15,   15,   18,   19,   13,   19,
-       19,   19,   19
+        4,    5,    6,    7,    8,    9,    3,    9,    9,    9,
+        9
     } ;
 
-static yyconst flex_int16_t yy_chk[14] =
+static yyconst flex_int16_t yy_chk[12] =
     {   0,
-        1,    1,    1,    1,   20,   20,   21,   13,   19,   19,
-       19,   19,   19
+        1,    1,    1,    1,   10,    3,    9,    9,    9,    9,
+        9
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -451,19 +447,14 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "json.l"
-#line 2 "json.l"
+#line 1 "src/json.l"
+#line 2 "src/json.l"
 #include <stdlib.h>
 #include <stdio.h>
-
-#line 460 "lex.yy.c"
+#include "json.tab.h"
+#line 456 "src/lexx.yy.c"
 
 #define INITIAL 0
-#define COLON 1
-#define LBRACE 2
-#define RBRACE 3
-#define QUOTE 4
-#define TXT 5
 
 #ifndef YY_NO_UNISTD_H
 /* Special case for "unistd.h", since it is non-ANSI. We include it way
@@ -643,9 +634,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 7 "json.l"
+#line 7 "src/json.l"
 
-#line 649 "lex.yy.c"
+#line 640 "src/lexx.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -698,13 +689,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 20 )
+				if ( yy_current_state >= 10 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 9 );
+		while ( yy_base[yy_current_state] != 7 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -730,31 +721,29 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "json.l"
+#line 8 "src/json.l"
 {return LBRACE;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "json.l"
+#line 9 "src/json.l"
 {return RBRACE;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 10 "json.l"
-{printf("matched"); return TXT;} 
+#line 10 "src/json.l"
+{
+     yytext;
+    return TXT;
+    } 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "json.l"
+#line 14 "src/json.l"
 ECHO;
 	YY_BREAK
-#line 752 "lex.yy.c"
+#line 746 "src/lexx.yy.c"
 case YY_STATE_EOF(INITIAL):
-case YY_STATE_EOF(COLON):
-case YY_STATE_EOF(LBRACE):
-case YY_STATE_EOF(RBRACE):
-case YY_STATE_EOF(QUOTE):
-case YY_STATE_EOF(TXT):
 	yyterminate();
 
 	case YY_END_OF_BUFFER:
@@ -1045,7 +1034,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 20 )
+			if ( yy_current_state >= 10 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1073,11 +1062,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 20 )
+		if ( yy_current_state >= 10 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 19);
+	yy_is_jam = (yy_current_state == 9);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1750,7 +1739,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 11 "json.l"
+#line 14 "src/json.l"
 
 
 

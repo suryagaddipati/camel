@@ -57,7 +57,7 @@ check:
 	@echo Files with potentially dangerous functions.
 	@egrep $(BADFUNCS) $(SOURCES) || true
 
-json: json.l json.y
-	bison -d json.y -o json.tab.c
-	flex json.l
-	gcc -o json json.tab.c lex.yy.c -lfl
+json: src/json.l src/json.y
+	bison -d src/json.y -o src/json.tab.c
+	flex  -o src/lex.yy.c src/json.l
+	gcc -o bin/json src/json.tab.c src/lex.yy.c -lfl
