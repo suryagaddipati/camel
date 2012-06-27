@@ -5,11 +5,11 @@
 %}
 
 %%
-\{  {return LBRACE;}
+\{ {return LBRACE;}
 \}  {return RBRACE;}
-(.)+ {
-     yytext;
-    return TXT;
+:  {return COLON;}
+([a-z]|[0-9]|[A-Z])+ {
+    return STR;
     } 
 %%
 

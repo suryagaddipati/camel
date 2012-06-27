@@ -43,7 +43,7 @@
      LBRACE = 259,
      RBRACE = 260,
      QUOTE = 261,
-     TXT = 262
+     STR = 262
    };
 #endif
 /* Tokens.  */
@@ -51,7 +51,7 @@
 #define LBRACE 259
 #define RBRACE 260
 #define QUOTE 261
-#define TXT 262
+#define STR 262
 
 
 

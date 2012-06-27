@@ -70,7 +70,7 @@
      LBRACE = 259,
      RBRACE = 260,
      QUOTE = 261,
-     TXT = 262
+     STR = 262
    };
 #endif
 /* Tokens.  */
@@ -78,7 +78,7 @@
 #define LBRACE 259
 #define RBRACE 260
 #define QUOTE 261
-#define TXT 262
+#define STR 262
 
 
 
@@ -355,9 +355,9 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  4
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   2
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  8
@@ -366,7 +366,7 @@ union yyalloc
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  2
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  5
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
@@ -418,7 +418,7 @@ static const yytype_uint8 yyprhs[] =
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-       9,     0,    -1,     7,    -1
+       9,     0,    -1,     4,     7,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
@@ -434,7 +434,7 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "COLON", "LBRACE", "RBRACE", "QUOTE",
-  "TXT", "$accept", "object", 0
+  "STR", "$accept", "object", 0
 };
 #endif
 
@@ -456,7 +456,7 @@ static const yytype_uint8 yyr1[] =
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     2
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -464,7 +464,7 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     0,     0,     2,     1
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -475,16 +475,16 @@ static const yytype_int8 yydefgoto[] =
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -8
+#define YYPACT_NINF -7
 static const yytype_int8 yypact[] =
 {
-      -7,    -8,     1,    -8
+      -4,    -6,     2,    -7,    -7
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -8,    -8
+      -7,    -7
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -494,19 +494,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     3
+       1,     3,     4
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       7,     0
+       4,     7,     0
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     7,     9,     0
+       0,     4,     9,     7,     0
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1322,7 +1322,7 @@ yyreduce:
     {
         case 2:
 #line 27 "src/json.y"
-    { printf("ANS: %s\n", (yyvsp[(1) - (1)].str));  ;}
+    { printf("parsed successfully");  ;}
     break;
 
 

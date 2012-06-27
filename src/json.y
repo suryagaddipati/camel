@@ -21,10 +21,10 @@ void yyerror(const char *msg)
       }
 
 %token<chr>  COLON LBRACE RBRACE QUOTE 
-%token<str>   TXT
+%token<str>   STR
 %%
 object : /*empty*/
-       TXT             { printf("ANS: %s\n", $1);  }
+       LBRACE STR              { printf("parsed successfully");  }
           ;
 
 %%
