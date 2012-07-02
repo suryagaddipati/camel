@@ -43,7 +43,8 @@
      LBRACE = 259,
      RBRACE = 260,
      QUOTE = 261,
-     STR = 262
+     COMMA = 262,
+     STR = 263
    };
 #endif
 /* Tokens.  */
@@ -51,7 +52,8 @@
 #define LBRACE 259
 #define RBRACE 260
 #define QUOTE 261
-#define STR 262
+#define COMMA 262
+#define STR 263
 
 
 
@@ -64,7 +66,7 @@ typedef union YYSTYPE
      char chr;
       }
 /* Line 1529 of yacc.c.  */
-#line 68 "src/json.tab.h"
+#line 70 "src/json.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

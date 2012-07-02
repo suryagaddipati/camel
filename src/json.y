@@ -20,12 +20,20 @@ void yyerror(const char *msg)
      char chr;
       }
 
-%token<chr>  COLON LBRACE RBRACE QUOTE 
+%token<chr>  COLON LBRACE RBRACE QUOTE COMMA 
 %token<str>   STR
 %%
 object : /*empty*/
-       LBRACE STR              { printf("parsed successfully");  }
+       LBRACE key_value_pairs RBRACE { printf("parsed successfully");  }
           ;
+
+key_value_pairs: key_value_pair | 
+               key_value_pairs COMMA key_value_pair 
+              ;
+key_value_pair: str COLON str
+              ;
+str: QUOTE STR QUOTE  
+   ;
 
 %%
 

@@ -1,3 +1,4 @@
+%option noyywrap
 %{
 #include <stdlib.h>
 #include <stdio.h>
@@ -8,6 +9,8 @@
 \{ {return LBRACE;}
 \}  {return RBRACE;}
 :  {return COLON;}
+\" { return QUOTE;}
+, {return COMMA;}
 ([a-z]|[0-9]|[A-Z])+ {
     return STR;
     } 
