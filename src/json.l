@@ -1,4 +1,5 @@
 %option noyywrap
+%option nodefault //do not add default ignore rule
 %{
 #include <stdlib.h>
 #include <stdio.h>
